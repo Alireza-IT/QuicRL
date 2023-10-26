@@ -1,4 +1,4 @@
-aioquic
+aioquic with RL optimization 
 =======
 
 |rtd| |pypi-v| |pypi-pyversions| |pypi-l| |tests| |codecov| |black|
