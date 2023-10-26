@@ -13,11 +13,7 @@ class RL(gym.Env):
 
     def __init__(self):
         super().__init__()
-        # Define action and observation space
-        # They must be gym.spaces objects
-        # Example when using discrete actions:
         self.action_space = spaces.Discrete(3)
-        # Example for using image as input (channel-first; channel-last also works):
         self.observation_space = spaces.Box(low=0, high=255,
                                             shape=(5,2), dtype=np.float32)
         self.current_reward = 0.0
@@ -36,8 +32,7 @@ class RL(gym.Env):
         average = np.mean(self.observation, axis=0)
         maximum = np.max(self.observation , axis = 0)
         reward = (average[0]/maximum[0]) - (average[1]/maximum[1])
-        # print(f"this is current observation {self.observation} , throughput avg us {average}, maximum is {maximum}")
-        # print(f"this is reward {reward}")
+
         return reward
         
     def step(self, action):
@@ -61,21 +56,3 @@ class RL(gym.Env):
         self.done = False
         self.observation = np.array(get_data.recieve_data())
         return self.observation
-
-    # def render(self):
-    #     ...
-
-    # def close(self):
-    #     ...
-
-# env = RL()
-# sample = env.observation_space.sample()
-# print(sample)
-# print(sample[1])
-# print(sample[1])˜
-# print(env.reset())
-# env.act_apply(1)
-# env.act_apply(0)
-# env.calculate_reward()
-# print(env.reset())
-# print(get_data.recieve_data())

@@ -9,9 +9,9 @@ models_dir = f"model-PPO-{int(time.time())}"
 logdir = f"logs-PPO-{int(time.time())}"
 
 if not os.path.exists(models_dir):
-    os.mkdir(models_dir)
+    os.makedirs(models_dir)
 if not os.path.exists(logdir):
-    os.mkdir(logdir)
+    os.makedirs(logdir)
 
 env = RL()
 
@@ -31,28 +31,10 @@ env.close()
 
 
 
-def build_model(states,actions):
-    model = Sequential()
-    model.add(Dense(24,activation="relu",input_shape=states)) # pass value to the deep learning model 
-    model.add(Dense(24,activation="relu"))
-    model.add(Dense(actions,activation='linear'))
-    return model
+model = PPO("Mlpolicy",env, verbose=1,tensorboard_log=logdir)
 
-
-model = build_model(states,actions)
-print(model.summary())
-# del model
-
-def build_agent(model, actions):
-    policy = BoltzmannQPolicy()
-    memory = SequentialMemory(limit=50000, window_length=1)
-    dqn = DQNAgent(model=model, memory=memory, policy=policy, 
-                  nb_actions=actions, nb_steps_warmup=10, target_model_update=1e-2)
-    return dqn
-
-dqn = build_agent(model, actions)
-dqn.compile(Adam(lr=1e-3), metrics=['mae'])
-dqn.fit(env, nb_steps=50000, visualize=False, verbose=1)
-
-scores = dqn.test(env, nb_episodes=100, visualize=False)
-print(np.mean(scores.history['episode_reward']))
+TIMESTEPS= 10000
+for i in range(1,100)
+    model.learn(total_timesteps=TIMESTEPS ,reset_num_timesteps=False, tb_log_name="PPO")
+    # model.learn(total_timesteps=TIMESTEPS ,reset_num_timesteps=False, tb_log_name="A2C")
+    model.save(f"{models_dir}/{TIMESTEPS*i}")

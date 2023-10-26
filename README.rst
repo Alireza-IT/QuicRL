@@ -112,7 +112,7 @@ You will need to set some environment variables to link against OpenSSL:
   > $Env:INCLUDE = "C:\Progra~1\OpenSSL-Win64\include"
   > $Env:LIB = "C:\Progra~1\OpenSSL-Win64\lib"
 
-Running the examples
+Running the examples and using RL
 --------------------
 
 `aioquic` comes with a number of examples illustrating various QUIC usecases.

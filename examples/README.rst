@@ -9,8 +9,20 @@ After checking out the code using git you can run:
    $ pip install asgiref dnslib httpbin starlette wsproto
 
 
-HTTP/3
+HTTP/3 and RL
 ------
+
+RL environment and model 
+.............
+
+First of all we need to run https/3 server (you can follow details below) and then run.sh script to send request
+to the server it just do it for 500 seconds if you want more or less you can change the value. then we have two scripts for RL
+one is env.py which is our environment and another is env_check.py which is for checking and building the model. env.py is getting the data from client-server communication.
+Then we need to run env_check.py to build the model, we can define the time-steps in order to define number of iteration and the same time it generate logs in current example directory
+which algorithms going to use as reference and you can see by tensorflow. And finally when communication is finished, result of env_check.py will be displayed 
+on console and saved as well on data.txt file. 
+
+
 
 HTTP/3 server
 .............
